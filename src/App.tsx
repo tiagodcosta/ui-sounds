@@ -41,10 +41,10 @@ function App() {
     <div className="App">
       <Grid templateColumns="repeat(1, 1fr)" gap={2}>
       <Box m="0 auto">
-        <Heading>UI Sounds</Heading>
+        <Heading as="h1" size="2xl" mb="40px" mt="40px">UI Sounds</Heading>
         <Box w="100%" p={4} mb="32px">
           <Heading as="h2" color="teal" mb="32px">1) Sound as action feedback (earcon)</Heading>
-          <Button variantColor="orange" onClick={handleClickOne}>Click me</Button>
+          <Button variantColor="purple" onClick={handleClickOne}>Click me</Button>
         </Box>
         <Box w="100%" p={4} mb="32px">
           <Heading as="h2" color="teal" mb="32px">2) Sound as hero (success)</Heading>
