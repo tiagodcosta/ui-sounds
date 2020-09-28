@@ -26,8 +26,8 @@ function App() {
     mockupSaveRequest()
     .then(() => {
       setLoading(false);
-      setButtonText("Received!")
       playSound(successAudio);
+      setButtonText("Received!")
     })
     .catch(() => {})
   }
