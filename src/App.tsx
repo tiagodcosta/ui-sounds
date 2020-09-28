@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {FunctionComponent, useState} from 'react';
+import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import { Button, Grid, Box, Heading, List, ListIcon, ListItem, Progress, useToast } from "@chakra-ui/core"
 import playSound from './utils/playsound';
 import mockupSaveRequest from './utils/mockup-request';
@@ -13,11 +14,14 @@ const clickAudio = new Audio(click);
 const successAudio = new Audio(success);
 const messageAudio = new Audio(message);
 
-function App() {
+
+//Component
+const App:FunctionComponent = () => {
 
   const [loading, setLoading] = useState(false);
   const [buttonText, setButtonText] = useState('Send files');
   const [counter, setCounter] = useState(0);
+  const [openList, setOpenList] = useState(false);
   const toast = useToast();
 
   const handleClickOne = () => {
@@ -38,6 +42,10 @@ function App() {
 
   const interval = () => {
     setInterval(() => setCounter(prevState => prevState + 10), 200)
+  }
+
+  const handleClickThree = () => {
+    setOpenList((prevState) => !prevState);
   }
 
   const handleClickFour = () => {
@@ -76,25 +84,19 @@ function App() {
         </Box>
         <Box w="100%" p={4} mb="32px">
           <Heading as="h2" color="teal" mb="32px">3) Sound as decoration</Heading>
-          <Button mb="16px">Start</Button>
-          <List spacing={3}>
-            <ListItem>
-              <ListIcon icon="check-circle" color="green.500" />
-              Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
-            </ListItem>
-            <ListItem>
-              <ListIcon icon="check-circle" color="green.500" />
-              Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
-            </ListItem>
-            <ListItem>
-              <ListIcon icon="check-circle" color="green.500" />
-              Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
-            </ListItem>
-            <ListItem>
-              <ListIcon icon='check-circle' color="green.500" />
-              Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
-            </ListItem>
+          <Button mb="16px" onClick={handleClickThree}>Start</Button>
+          <AnimateSharedLayout>
+            <List spacing={3}>
+              {openList && items.map((item, index) => {
+                return (
+                  <ListItem key={index}>
+                    <ListIcon icon="check-circle" color="green.500" />
+                      {item}
+                  </ListItem>
+                )
+              })}
             </List>
+          </AnimateSharedLayout>
         </Box>
         <Box w="100%" p={4} mb="32px">
           <Heading as="h2" color="teal" mb="32px">3) Sound as notification</Heading>
@@ -106,5 +108,7 @@ function App() {
     </div>
   );
 }
+
+const items = ['Quidem, ipsam illum quis sed voluptatum quae eum fugit earum', 'Quidem, ipsam illum quis sed voluptatum quae eum fugit earum', 'Quidem, ipsam illum quis sed voluptatum quae eum fugit earum'];
 
 export default App;
