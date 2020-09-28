@@ -1,24 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Button, Grid, Box, Heading } from "@chakra-ui/core"
+import playSound from './utils/playsound';
 import './App.css';
 
+//Sounds
+const click = require('./sounds/click.m4a');
+const clickAudio = new Audio(click)
+
 function App() {
+
+  const handleClickOne = () => {
+    playSound(clickAudio);
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Grid templateColumns="repeat(1, 1fr)" gap={2}>
+      <Heading>UI Sounds</Heading>
+      <Box bg="tomato" w="100%" p={4} color="white">
+        <Button variantColor="green" onClick={handleClickOne}>Click me, please!</Button>
+      </Box>
+      </Grid> 
     </div>
   );
 }
