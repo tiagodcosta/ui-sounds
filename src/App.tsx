@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Button, Grid, Box, Heading, List, ListIcon, ListItem, Progress } from "@chakra-ui/core"
+import { Button, Grid, Box, Heading, List, ListIcon, ListItem, Progress, useToast } from "@chakra-ui/core"
 import playSound from './utils/playsound';
 import mockupSaveRequest from './utils/mockup-request';
 import './App.css';
@@ -7,14 +7,18 @@ import './App.css';
 //Sounds
 const click = require('./sounds/click.m4a');
 const success = require('./sounds/success.wav');
+const message = require('./sounds/message.wav');
+
 const clickAudio = new Audio(click);
 const successAudio = new Audio(success);
+const messageAudio = new Audio(message);
 
 function App() {
 
   const [loading, setLoading] = useState(false);
-  const [ buttonText, setButtonText ] = useState('Send files');
+  const [buttonText, setButtonText] = useState('Send files');
   const [counter, setCounter] = useState(0);
+  const toast = useToast();
 
   const handleClickOne = () => {
     playSound(clickAudio);
@@ -34,6 +38,17 @@ function App() {
 
   const interval = () => {
     setInterval(() => setCounter(prevState => prevState + 10), 200)
+  }
+
+  const handleClickFour = () => {
+    toast({
+      title: "New message",
+      description: "Hello John! The article was...",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    })
+    playSound(messageAudio);
   }
 
 
@@ -60,6 +75,7 @@ function App() {
         </Box>
         <Box w="100%" p={4} mb="32px">
           <Heading as="h2" color="teal" mb="32px">3) Sound as decoration</Heading>
+          <Button mb="16px">Start</Button>
           <List spacing={3}>
             <ListItem>
               <ListIcon icon="check-circle" color="green.500" />
@@ -78,6 +94,11 @@ function App() {
               Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
             </ListItem>
             </List>
+        </Box>
+        <Box w="100%" p={4} mb="32px">
+          <Heading as="h2" color="teal" mb="32px">3) Sound as notification</Heading>
+          <Button mb="16px" onClick={handleClickFour}>Show me</Button>
+         
         </Box>
       </Box>
       </Grid> 
