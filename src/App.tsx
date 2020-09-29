@@ -15,7 +15,8 @@ const messageAudio = new Audio(message);
 
 
 const App:FunctionComponent = () => {
-
+  let interval: any = null;
+  
   const [loading, setLoading] = useState(false);
   const [buttonText, setButtonText] = useState('Send files');
   const [counter, setCounter] = useState(0);
@@ -26,21 +27,25 @@ const App:FunctionComponent = () => {
   }
 
   const handleClickTwo = () => {
-    setLoading(true)
-    interval();
+    setLoading(true);
+    startProgress();
     mockupSaveRequest()
     .then(() => {
       setLoading(false);
       playSound(successAudio);
       setButtonText("Sent!")
+      stopProgress();
     })
     .catch(() => {})
   }
 
-  const interval = () => {
-    setInterval(() => setCounter(prevState => prevState + 10), 200)
+  const startProgress = () => {
+    interval = setInterval(() => setCounter(prevState => prevState + 11), 200)
   }
 
+  const stopProgress = () => {
+    clearInterval(interval)
+  }
   const handleClickThree = () => {
     toast({
       title: "New message",
@@ -77,7 +82,6 @@ const App:FunctionComponent = () => {
         <Box w="100%" p={4} mb="32px">
           <Heading as="h2" color="teal" mb="32px">3) Sound as notification</Heading>
           <Button mb="16px" onClick={handleClickThree}>Show me</Button>
-         
         </Box>
       </Box>
       </Grid> 
