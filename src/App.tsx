@@ -1,6 +1,5 @@
 import React, {FunctionComponent, useState} from 'react';
-import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
-import { Button, Grid, Box, Heading, List, ListIcon, ListItem, Progress, useToast } from "@chakra-ui/core"
+import { Button, Grid, Box, Heading, Progress, useToast } from "@chakra-ui/core"
 import playSound from './utils/playsound';
 import mockupSaveRequest from './utils/mockup-request';
 import './App.css';
@@ -15,13 +14,11 @@ const successAudio = new Audio(success);
 const messageAudio = new Audio(message);
 
 
-//Component
 const App:FunctionComponent = () => {
 
   const [loading, setLoading] = useState(false);
   const [buttonText, setButtonText] = useState('Send files');
   const [counter, setCounter] = useState(0);
-  const [openList, setOpenList] = useState(false);
   const toast = useToast();
 
   const handleClickOne = () => {
@@ -35,7 +32,7 @@ const App:FunctionComponent = () => {
     .then(() => {
       setLoading(false);
       playSound(successAudio);
-      setButtonText("Received!")
+      setButtonText("Sent!")
     })
     .catch(() => {})
   }
@@ -45,10 +42,6 @@ const App:FunctionComponent = () => {
   }
 
   const handleClickThree = () => {
-    setOpenList((prevState) => !prevState);
-  }
-
-  const handleClickFour = () => {
     toast({
       title: "New message",
       description: "Hello John! The article was...",
@@ -59,7 +52,6 @@ const App:FunctionComponent = () => {
     })
     playSound(messageAudio);
   }
-
 
   return (
     <div className="App">
@@ -83,24 +75,8 @@ const App:FunctionComponent = () => {
           <Progress mt="16px" mb="16px" value={counter} />
         </Box>
         <Box w="100%" p={4} mb="32px">
-          <Heading as="h2" color="teal" mb="32px">3) Sound as decoration</Heading>
-          <Button mb="16px" onClick={handleClickThree}>Start</Button>
-          <AnimateSharedLayout>
-            <List spacing={3}>
-              {openList && items.map((item, index) => {
-                return (
-                  <ListItem key={index}>
-                    <ListIcon icon="check-circle" color="green.500" />
-                      {item}
-                  </ListItem>
-                )
-              })}
-            </List>
-          </AnimateSharedLayout>
-        </Box>
-        <Box w="100%" p={4} mb="32px">
           <Heading as="h2" color="teal" mb="32px">3) Sound as notification</Heading>
-          <Button mb="16px" onClick={handleClickFour}>Show me</Button>
+          <Button mb="16px" onClick={handleClickThree}>Show me</Button>
          
         </Box>
       </Box>
@@ -108,7 +84,5 @@ const App:FunctionComponent = () => {
     </div>
   );
 }
-
-const items = ['Quidem, ipsam illum quis sed voluptatum quae eum fugit earum', 'Quidem, ipsam illum quis sed voluptatum quae eum fugit earum', 'Quidem, ipsam illum quis sed voluptatum quae eum fugit earum'];
 
 export default App;
