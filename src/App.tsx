@@ -40,7 +40,7 @@ const App:FunctionComponent = () => {
   }
 
   const startProgress = () => {
-    interval = setInterval(() => setCounter(prevState => prevState + 11), 200)
+    interval = setInterval(() => setCounter(prevState => prevState + 11), 200);
   }
 
   const stopProgress = () => {
