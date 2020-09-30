@@ -5,7 +5,7 @@ import mockupSaveRequest from './utils/mockup-request';
 import './App.css';
 
 //Sounds
-const click = require('./sounds/click.m4a');
+const click = require('./sounds/click.wav');
 const success = require('./sounds/success.wav');
 const message = require('./sounds/message.wav');
 
