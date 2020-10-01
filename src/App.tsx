@@ -27,7 +27,7 @@ const App:FunctionComponent = () => {
 
     setLoading(true);
     startProgress();
-    successAudio.play().then(()=> successAudio.pause()); // Hack to play audio with promise on Safari/Mobile
+    successAudio.play().then(()=> successAudio.pause()); // Due to auto-play restrictions, hack to play audio with promise on Safari/Mobile 
     mockupSaveRequest()
     .then(() => {
       setLoading(false);
