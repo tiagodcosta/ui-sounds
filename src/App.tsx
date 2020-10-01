@@ -9,10 +9,6 @@ const click = require('./sounds/click.wav');
 const success = require('./sounds/success.wav');
 const message = require('./sounds/message.wav');
 
-const clickAudio = new Audio(click);
-const successAudio = new Audio(success);
-const messageAudio = new Audio(message);
-
 
 const App:FunctionComponent = () => {
   let interval: any = null;
@@ -23,18 +19,21 @@ const App:FunctionComponent = () => {
   const toast = useToast();
 
   const handleClickOne = () => {
-    playSound(clickAudio);
+    playSound(new Audio(click));
   }
 
   const handleClickTwo = () => {
+    const successAudio = new Audio(success);
+
     setLoading(true);
     startProgress();
+    successAudio.play().then(()=> successAudio.pause()); // Hack to play audio with promise on Safari/Mobile
     mockupSaveRequest()
     .then(() => {
       setLoading(false);
-      playSound(successAudio);
-      setButtonText("Sent!")
+      setButtonText("Sent!");
       stopProgress();
+      successAudio.play();
     })
     .catch(() => {})
   }
@@ -56,7 +55,7 @@ const App:FunctionComponent = () => {
       isClosable: true,
       position: "top-right"
     })
-    playSound(messageAudio);
+    playSound(new Audio(message));
   }
 
   return (
