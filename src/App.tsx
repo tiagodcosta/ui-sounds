@@ -46,6 +46,7 @@ const App:FunctionComponent = () => {
   const stopProgress = () => {
     clearInterval(interval)
   }
+
   const handleClickThree = () => {
     toast({
       title: "New message",
