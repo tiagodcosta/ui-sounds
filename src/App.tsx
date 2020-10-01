@@ -33,7 +33,7 @@ const App:FunctionComponent = () => {
       setLoading(false);
       setButtonText("Sent!");
       stopProgress();
-      successAudio.play();
+      successAudio.play().catch(console.error);
     })
     .catch(() => {})
   }
