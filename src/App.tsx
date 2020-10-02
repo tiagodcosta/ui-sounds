@@ -18,6 +18,9 @@ const App:FunctionComponent = () => {
   const [counter, setCounter] = useState(0);
   const toast = useToast();
 
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  const audioCtx = new AudioContext();
+
   const handleClickOne = () => {
     playSound(new Audio(click));
   }
