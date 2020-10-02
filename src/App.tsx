@@ -20,6 +20,7 @@ const App:FunctionComponent = () => {
 
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   const audioCtx = new AudioContext();
+  console.log(audioCtx)
 
   const handleClickOne = () => {
     playSound(new Audio(click));
